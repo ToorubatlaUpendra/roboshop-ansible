@@ -49,10 +49,10 @@
        src: mongodb.repo
        dest: /etc/yum.repos.d/mongodb.repo
 
-  - name: Install mongodb client
-    ansible.builtin.package:
-      name: mongodb-org-shell
-      state: present
+    - name: Install mongodb client
+      ansible.builtin.package:
+        name: mongodb-org-shell
+        state: present
 
    - name: get the categories count
     ansible.builtin.command:  mongo --host mongodb.daws76s.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
