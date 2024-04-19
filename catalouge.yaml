@@ -9,3 +9,7 @@
       ansible.builtin.dnf:
         name: nodejs
         state: present
+
+     - name: create roboshop user
+       ansible.builtin.user:
+        name: roboshop
