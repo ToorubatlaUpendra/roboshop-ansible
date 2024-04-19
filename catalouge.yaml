@@ -1,0 +1,5 @@
+- name: catalouge
+  hosts: catalouge
+  tasks:
+    - name: diable nodeje and enable nodejs18
+      anisible.builtin.command: dnf module disable nodejs -y;dnf module enable nodejs:18 -y
