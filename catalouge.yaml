@@ -23,3 +23,33 @@
       ansible.builtin.get_url:
         url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
         dest: /tmp/catalogue.zip
+
+    - name: Unarchive a file that is already on the remote machine
+      ansible.builtin.unarchive:
+        src: /tmp/catalogue.zip
+        dest: /app
+        remote_src: yes
+
+    - name: disable nodejs and enable nodejs18
+      ansible.builtin.command: npm install
+      args:
+        chdir: /app
+
+    - name: copy catalouge
+      ansible.builtin.copy:
+        src: catalouge.service
+        dest: /etc/systemd/system/catalogue.service
+
+    - name: deamon realod and start
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+
+    - name: Copy mongodb repo
+      ansible.builtin.copy:
+       src: mongodb.repo
+       dest: /etc/yum.repos.d/mongodb.repo
+
+  - name: Install mongodb client
+    ansible.builtin.package:
+      name: mongodb-org-shell
+      state: present
