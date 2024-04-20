@@ -30,7 +30,7 @@
         dest: /app
         remote_src: yes
 
- - name: disable nodejs and enable nodejs18
+  - name: install npm
    ansible.builtin.command: npm install
    args:
     chdir: /app
