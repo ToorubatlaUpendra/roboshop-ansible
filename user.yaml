@@ -31,9 +31,9 @@
         remote_src: yes
 
   - name: install npm
-   ansible.builtin.command: npm install
-   args:
-    chdir: /app
+    ansible.builtin.command: npm install
+    args:
+     chdir: /app
     
   - name: copy user
     ansible.builtin.copy:
