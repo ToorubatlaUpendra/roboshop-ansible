@@ -36,12 +36,12 @@
     chdir: /app
     
   - name: copy user
-      ansible.builtin.copy:
+    ansible.builtin.copy:
         src: user.service
         dest: /etc/systemd/system/uer.service
 
   - name: deamon realod and start
-      ansible.builtin.systemd_service:
+    ansible.builtin.systemd_service:
         daemon_reload: true
 
     - name: Copy mongodb repo
