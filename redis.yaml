@@ -22,7 +22,7 @@
         replace: "0.0.0.0"
 
     - name: starting service redis
-      ansible.builtin.systemd_service:
+      ansible.builtin.service:
         name: redis
         enabled: true
         state: started
