@@ -44,30 +44,30 @@
     ansible.builtin.systemd_service:
         daemon_reload: true
 
-    - name: Copy mongodb repo
-      ansible.builtin.copy:
+  - name: Copy mongodb repo
+    ansible.builtin.copy:
         src: mongodb.repo
         dest: /etc/yum.repos.d/mongodb.repo
 
-    - name: Install mongodb client
-      ansible.builtin.package:
+  - name: Install mongodb client
+    ansible.builtin.package:
         name: mongodb-org-shell
         state: present
 
-    - name: get the categories count
-      ansible.builtin.command: mongo --host 34.228.168.8 --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  - name: get the categories count
+    ansible.builtin.command: mongo --host 34.228.168.8 --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
       register: product_count
 
     # - name: print the count
     #   ansible.builtin.debug:
     #     msg: "product count: {{product_count}}"
 
-    - name: load catalogue data
-      ansible.builtin.command: mongo --host 34.228.168.8 < /app/schema/user.js
+  - name: load catalogue data
+    ansible.builtin.command: mongo --host 34.228.168.8 < /app/schema/user.js
       when: product_count.stdout == "0" # keep double quotes
 
-    - name: start and enable catalogue
-      ansible.builtin.service:
+  - name: start and enable catalogue
+    ansible.builtin.service:
         name: user
         state: restarted
         enabled: yes
